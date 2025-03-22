@@ -55,20 +55,27 @@ namespace PURCHASE_LIST.MVVM.ViewModel
         {
             ItemsList itemsList = new ItemsList() 
             { 
-                ListName = "Суповой набор!", itemsList = new ObservableCollection<Item>() 
+                ListName = "Укажите название списка здесь!", itemsList = new ObservableCollection<Item>() 
                 { 
-                    new Item { ItemName = "Креветки!" }, 
-                    new Item { ItemName = "Грибочки!" }, 
-                    new Item { ItemName = "Помидорки!" }, 
-                    new Item { ItemName = "Лучок!" }, 
-                    new Item { ItemName = "Морковка!" } 
+                    new Item { ItemName = "Укажите название покупки здесь!!" }                    
                 }            
             };
             mainList = new ObservableCollection<ItemsList>();
             mainList.Add(itemsList);
-            string[] temp = File.ReadAllLines("purchase_list.txt");
-            
-
+            string temp = File.ReadAllText("purchase_list.txt");
+            List<string> strs = temp.Split('#').Where(t => t.Trim().Any()).ToList();
+            var first = strs[0].Trim().Split('\n');
+            for (int i = 0; i < strs.Count; i++)
+            {
+                var currentItems = strs[i].Trim().Split('\n');                
+                ObservableCollection<Item> items = new();
+                for (int j = 1; j < currentItems.Length; j++)
+                {
+                    items.Add(new Item { ItemName = currentItems[j] });
+                }
+                ItemsList currentItemsList = new ItemsList() { ListName = currentItems[0], itemsList = items };
+                mainList.Add(currentItemsList);
+            }
             ListCollectionView = CollectionViewSource.GetDefaultView(mainList);
             ListCollectionView.Filter = FilterList;
         }
@@ -123,7 +130,6 @@ namespace PURCHASE_LIST.MVVM.ViewModel
                      }));
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
