@@ -1,0 +1,29 @@
+﻿<Window x:Class="Proba.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proba"
+        mc:Ignorable="d"
+        Title="Shopping list" Height="821" Width="600"
+        ResizeMode="CanMinimize"
+         WindowStartupLocation="Manual">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/spisok-pokupok-0.0.10-13.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="610"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Created by " Margin="30 0 0 0" FontSize="20" Foreground="White"/>
+            <TextBlock Text="A.Yeryom, S.Vorobev" Margin="10 0 0 0" FontSize="20" Foreground="White"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Button Width="250" Click="Add_Click" Style="{StaticResource RoundButtonTemplate}" Content="Добавить" Background="White" Height="60" HorizontalAlignment="Left" Margin="50 10 0 0" FontSize="20"  />
+            <Button Width="250" Click="Search_Click" Style="{StaticResource RoundButtonTemplate}" Content="Поиск" Height="60" Background="White" HorizontalAlignment="Left" Margin="50 20 0 0" FontSize="20" />
+        </StackPanel>
+    </Grid>
+</Window>
